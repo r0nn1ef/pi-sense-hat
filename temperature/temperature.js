@@ -3,10 +3,17 @@ Module.register("temperature", {
     defaults: {
         text: "Hello World!"
     },
-    getTemplate () {
-        return "temperature.njk";
+    start () {
+        Log.info(`Starting module: ${this.name}`);
+        this.updateDom();
+        setInterval( () => {
+          this.updateDom();
+        }, 1000);
     },
-    getTemplateData () {
-        return this.config;
+    getDom () {
+        const wrapper = document.createElement("div");
+        const rand = Math.random().toString();
+        wrapper.appendChild(document.createTextNode(rand));
+        return wrapper;
     }
 });
