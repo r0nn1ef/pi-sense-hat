@@ -15,5 +15,8 @@ Module.register("temperature", {
         const rand = Math.floor(Math.random() * 1000).toString();
         wrapper.appendChild(document.createTextNode(rand));
         return wrapper;
-    }
+    },
+    getScripts () {
+        return ["sensehat.js"];
+    },
 });
