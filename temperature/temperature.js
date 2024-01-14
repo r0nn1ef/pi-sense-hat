@@ -12,7 +12,7 @@ Module.register("temperature", {
     },
     getDom () {
         const wrapper = document.createElement("div");
-        const rand = Math.random().toString();
+        const rand = Math.floor(Math.random() * 1000).toString();
         wrapper.appendChild(document.createTextNode(rand));
         return wrapper;
     }
