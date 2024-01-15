@@ -11,6 +11,6 @@
   "author": "r0nn1ef8580@gmail.com",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "node-red-node-pi-sense-hat": "^0.1.5"
+    "nodeimu": "^2.1.12"
   }
 }
