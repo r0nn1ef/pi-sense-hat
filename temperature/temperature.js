@@ -1,3 +1,4 @@
+const nodeimu = require("nodeimu");
 
 Module.register("temperature", {
     defaults: {
@@ -16,8 +17,9 @@ Module.register("temperature", {
     getDom () {
         const wrapper = document.createElement("div");
         const rand = Math.floor(Math.random() * 1000).toString();
-
-        wrapper.appendChild(document.createTextNode(rand));
+        const IMU = nodeimu.IMU();
+        const data = IMU.getValueSync();
+        wrapper.appendChild(document.createTextNode(data.temperature.toPrecision(1)));
         return wrapper;
     }
 });
