@@ -1,5 +1,5 @@
 const NodeHelper = require("node_helper");
-const nodeimu = require("nodeimu");
+const nodeimu = require("nodeimu/index.js");
 const IMU = new nodeimu.IMU();
 
 module.exports = NodeHelper.create({
