@@ -1,25 +1,40 @@
-const nodeimu = require("nodeimu");
+
 
 Module.register("pi-sense-hat", {
     defaults: {
         text: "Hello World!"
     },
+    sensorData: null,
     start () {
         Log.info(`Starting module: ${this.name}`);
-        this.updateDom();
+        this.getSensorData();
+
+    },
+    getSensorData() {
+        var self = this;
         setInterval( () => {
-            this.updateDom();
+            self.sendSocketNotification("SENSE_HAT_READ_DATA");
+            self.updateDom();
         }, 1000);
     },
     getScripts () {
-        return ["node_modules/nodeimu/index.js"];
+        return [];
     },
+    socketNotificationReceived(notification, payload) {
+        switch ( notification ) {
+            case "SENSE_HAT_DATA":
+                this.sensorData = payload;
+                break;
+            default:
+                // do nothing.
+        }
+    },
+
     getDom () {
+        let self = this;
         const wrapper = document.createElement("div");
-        const rand = Math.floor(Math.random() * 1000).toString();
-        const IMU = nodeimu.IMU();
-        const data = IMU.getValueSync();
-        wrapper.appendChild(document.createTextNode(data.temperature.toPrecision(1)));
+        const outStr = self.sensorData === null ? "Loading ..." : self.sensorData;
+        wrapper.appendChild(document.createTextNode(outStr));
         return wrapper;
     }
 });
